@@ -432,3 +432,47 @@ body.dark-mode footer {
         text-align: left;
     }
 }
+
+/* No-JS fallbacks */
+.no-js .article-list {
+    display: block !important;
+}
+
+.no-js .nav-item.active {
+    font-weight: 600;
+}
+
+/* CSS-only navigation using :target */
+/* Default: show home list */
+.article-list {
+    display: none;
+}
+
+.article-list.active {
+    display: block;
+}
+
+/* :target selector shows the targeted list */
+.article-list:target {
+    display: block !important;
+}
+
+/* Hide all other lists when one is targeted */
+.article-list:target ~ .article-list {
+    display: none !important;
+}
+
+/* Dark mode toggle graceful degradation */
+.dark-mode-toggle {
+    /* If JS is disabled, the button won't work but won't break layout */
+}
+
+/* Ensure buttons don't break layout without JS */
+button.nav-item {
+    /* Convert to regular text if needed */
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}

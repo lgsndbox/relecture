@@ -8,9 +8,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <noscript>
+        <style>
+            .article-list { display: block !important; }
+            .dark-mode-toggle { display: none; }
+        </style>
+    </noscript>
 </head>
 <body class="light-mode">
-    <div id="header-placeholder"></div>
+    <header>
+        <div class="header-content">
+            <div class="title-row">
+                <h1 class="site-title">PAUSE</h1>
+                <button class="dark-mode-toggle" id="darkModeToggle">
+                    ☀︎
+                </button>
+            </div>
+            <nav>
+                <a href="#list-accueil" class="nav-item active" data-category="accueil">
+                    <span class="home-icon">⌂</span>
+                </a>
+                <a href="#list-art" class="nav-item" data-category="art">Art</a>
+                <a href="#list-societe" class="nav-item" data-category="societe">Société</a>
+                <a href="#list-philosophie" class="nav-item" data-category="philosophie">Philosophie</a>
+            </nav>
+        </div>
+    </header>
 
     <main>
         <div class="article-list active" id="list-accueil">
@@ -95,9 +118,10 @@
 
     </main>
 
-    <div id="footer-placeholder"></div>
+    <footer>
+        <div>© 2025 — Tous droits réservés</div>
+    </footer>
     
-    <script src="components.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

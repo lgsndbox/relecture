@@ -10,7 +10,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="light-mode">
-    <div id="header-placeholder"></div>
+    <header>
+        <div class="header-content">
+            <div class="title-row">
+                <h1 class="site-title">PAUSE</h1>
+                <button class="dark-mode-toggle" id="darkModeToggle">
+                    ☀︎
+                </button>
+            </div>
+            <nav>
+                <a href="index.html" class="nav-item">
+                    <span class="home-icon">⌂</span>
+                </a>
+                <a href="index.html#art" class="nav-item">Art</a>
+                <a href="index.html#societe" class="nav-item">Société</a>
+                <a href="index.html#philosophie" class="nav-item">Philosophie</a>
+            </nav>
+        </div>
+    </header>
 
     <main>
         <article class="active">
@@ -88,8 +105,27 @@
         </article>
     </main>
 
-    <div id="footer-placeholder"></div>
+    <footer>
+        <div>© 2025 — Tous droits réservés</div>
+    </footer>
     
-    <script src="components.js"></script>
+    <script>
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    darkModeToggle.textContent = '☾';
+                } else {
+                    darkModeToggle.textContent = '☀︎';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
