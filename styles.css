@@ -162,6 +162,8 @@ main {
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
+    text-decoration: none;
+    color: inherit;
 }
 
 body.light-mode .article-card {
