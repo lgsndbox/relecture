@@ -1,31 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TITRE DU SITE</title>
-  <meta name="description" content="Description du site">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="/js/theme.js" defer></script>
-</head>
-<body>
-  <header>
-    <nav>
-      <a href="/" class="site-title">Articles</a>
-      <!-- Hidden checkbox that CSS :has() will detect -->
-      <input type="checkbox" id="theme-checkbox" aria-label="Toggle dark mode">
-      <!-- Label styled as a button -->
-      <label for="theme-checkbox" id="theme-toggle">◐</label>
-    </nav>
-  </header>
-
-  <main>
-    CONTENU
-  </main>
-
-  <footer>
-    <p>&copy; 2025 - Tous droits réservés</p>
-  </footer>
-</body>
-</html>
-
+---
+layout: layout.html
+---
+{% for article in collections.articles %}
+<h2><a href="{{ article.url }}" >{{ article.data.title }}</a></h2>
+<p>{{ article.content }}</p>
+{% endfor %}
