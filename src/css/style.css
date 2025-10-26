@@ -140,6 +140,10 @@ nav {
   color: var(--text-color);
 }
 
+#theme-checkbox {
+  display: none;
+}
+
 #theme-toggle {
   background: none;
   border: 1px solid var(--border-color);
