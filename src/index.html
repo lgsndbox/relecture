@@ -12,9 +12,10 @@
   <header>
     <nav>
       <a href="/" class="site-title">Articles</a>
-      <button id="theme-toggle" aria-label="Changer le thème">
-        <span class="theme-icon" aria-hidden="true">◐</span>
-      </button>
+      <!-- Hidden checkbox that CSS :has() will detect -->
+      <input type="checkbox" id="theme-checkbox" aria-label="Toggle dark mode">
+      <!-- Label styled as a button -->
+      <label for="theme-checkbox" id="theme-toggle">◐</label>
     </nav>
   </header>
 
