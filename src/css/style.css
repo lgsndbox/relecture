@@ -60,6 +60,7 @@ h1, h2, h3, h4, h5, h6 {
   /* Light mode colors (default) */
   --bg-color: #ffffff;
   --text-color: #1a1a1a;
+  --text-2-color: #001a1a;
   --link-color: #0066cc;
   --link-hover: #004499;
   --border-color: #e0e0e0;
@@ -73,6 +74,7 @@ h1, h2, h3, h4, h5, h6 {
   :root {
     --bg-color: #1a1a1a;
     --text-color: #e8e8e8;
+    --text-2-color: #ff1a1a;
     --link-color: #66b3ff;
     --link-hover: #99ccff;
     --border-color: #333333;
@@ -86,6 +88,7 @@ h1, h2, h3, h4, h5, h6 {
 :root:has(#theme-checkbox:checked) {
   --bg-color: #1a1a1a;
   --text-color: #e8e8e8;
+  --text-2-color: #ffe8e8;
   --link-color: #66b3ff;
   --link-hover: #99ccff;
   --border-color: #333333;
@@ -98,6 +101,7 @@ h1, h2, h3, h4, h5, h6 {
 :root:has(#theme-checkbox:not(:checked)) {
   --bg-color: #ffffff;
   --text-color: #1a1a1a;
+  --text-2-color: #001a1a;
   --link-color: #0066cc;
   --link-hover: #004499;
   --border-color: #e0e0e0;
@@ -170,6 +174,11 @@ main {
   margin: 0 auto;
   padding: 2rem 1rem;
   min-height: calc(100vh - 10rem);
+}
+
+blockquote {
+  font-weight: 700;
+  color: var(--text-2-color);
 }
 
 /* Articles list */
