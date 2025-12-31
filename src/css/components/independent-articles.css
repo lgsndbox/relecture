@@ -1,0 +1,202 @@
+/* ============================================================================
+   INDEPENDENT ARTICLES COMPONENT
+   Homepage section for articles not tied to current theme
+   ============================================================================ */
+@layer components {
+  /* Independent Articles Card */
+  .independent-articles-card {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .independent-card__header {
+    background-color: var(--color-background-alt);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .independent-card__label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .independent-card__count {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .independent-card__main {
+    padding: 2rem;
+  }
+
+  .independent-card__intro {
+    background-color: var(--color-background-alt);
+    padding: 1.5rem;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-primary);
+    margin-bottom: 2rem;
+  }
+
+  .independent-card__intro p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    font-style: italic;
+  }
+
+  .independent-articles-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .independent-article__item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-light);
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .independent-article__item:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-background-alt);
+  }
+
+  .independent-article__image {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .independent-article__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .independent-article__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .independent-article__theme {
+    margin: 0;
+  }
+
+  .theme-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .independent-article__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .independent-article__title a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .independent-article__title a:hover {
+    color: var(--color-primary);
+  }
+
+  .independent-article__chapeau {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .independent-article__meta {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .independent-card__actions {
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .independent-card__header {
+      padding: 0.75rem 1rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+
+    .independent-card__main {
+      padding: 1rem;
+    }
+
+    .independent-card__intro {
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .independent-card__intro p {
+      font-size: 0.95rem;
+    }
+
+    .independent-articles-list {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .independent-article__item {
+      grid-template-columns: 100px 1fr;
+      padding: 0.75rem;
+      gap: 0.75rem;
+    }
+
+    .independent-article__image {
+      width: 100px;
+      height: 100px;
+    }
+
+    .independent-article__title {
+      font-size: 1.1rem;
+    }
+
+    .independent-article__chapeau {
+      font-size: 0.85rem;
+      -webkit-line-clamp: 2;
+    }
+
+    .independent-article__meta {
+      font-size: 0.7rem;
+    }
+  }
+}

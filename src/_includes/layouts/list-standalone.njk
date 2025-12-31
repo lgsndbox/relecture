@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="list-standalone">
+    <header class="page-header">
+        <h1>{{ title | default("Autres Articles") }}</h1>
+        {% if description %}
+        <p class="page-header-description">{{ description }}</p>
+        {% endif %}
+        {% if collections.unthemedArticles and collections.unthemedArticles.length > 0 %}
+        <p class="articles-count">{{ collections.unthemedArticles.length }} article{% if collections.unthemedArticles.length > 1 %}s{% endif %}</p>
+        {% endif %}
+    </header>
+
+    {% if collections.unthemedArticles and collections.unthemedArticles.length > 0 %}
+    <section class="standalone-articles-section">
+        <div class="articles-grid">
+            {% for article in collections.unthemedArticles %}
+            {% articleCard article %}
+            {% endfor %}
+        </div>
+    </section>
+    {% else %}
+    <section class="empty-state">
+        <p>Aucun article autonome pour le moment. Tous les articles sont associés à des thèmes spécifiques.</p>
+        <p><a href="/themes/" class="btn btn--primary btn--lg">Voir tous les thèmes</a></p>
+    </section>
+    {% endif %}
+</div>

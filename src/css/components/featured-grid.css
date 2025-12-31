@@ -1,0 +1,48 @@
+/* ============================================================================
+   FEATURED GRID COMPONENT
+   Legacy featured articles grid and explore CTA
+   ============================================================================ */
+@layer components {
+  /* Legacy featured articles styles (kept for compatibility) */
+
+  /* Use .badge.badge-primary.badge--absolute-left instead */
+
+  /* Explore themes CTA */
+  .explore-themes-cta {
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: var(--color-background-alt);
+    border-radius: var(--radius-lg);
+    margin: 4rem 0;
+  }
+
+  .explore-themes-cta h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+
+  .explore-themes-cta p {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin: 0 0 2rem;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+
+    /* CTA */
+    .explore-themes-cta {
+      padding: 2rem 1rem;
+      margin: 3rem 0;
+    }
+
+    .explore-themes-cta h2 {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
+    .explore-themes-cta p {
+      font-size: 0.95rem;
+    }
+  }
+}

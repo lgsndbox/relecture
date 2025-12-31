@@ -1,0 +1,66 @@
+/* ============================================================================
+   BADGE COMPONENT (BEM)
+   Visual labels and indicators
+   ============================================================================
+
+   Usage:
+   - Block: .badge
+   - Modifiers: .badge--primary, .badge--editorial, .badge--sm, etc.
+   - Elements: .badge__number, .badge__name
+
+   Migration notes:
+   - Old classes aliased for backward compatibility
+   - Remove aliases after migration complete (target: 2 weeks)
+   ============================================================================ */
+@layer components {
+  /* Block */
+  .badge {
+    display: inline-block;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  /* Modifiers - Style variants */
+  .badge--primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .badge--text {
+    background-color: transparent;
+    color: var(--color-primary);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Modifiers - Size variants */
+  .badge--sm {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  .badge--lg {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* Modifiers - Position variants */
+  .badge--absolute {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+  }
+
+  .badge--absolute--left {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10;
+  }
+}

@@ -1,0 +1,155 @@
+---
+layout: layouts/base.njk
+---
+
+<article class="article">
+    <div class="article__header">
+        {% set categoryData = categories | getCategoryBySlug(category) %}
+        {% set themeData = themes | getThemeBySlug(theme) %}
+
+        <div class="article__header-content">
+            <div class="article__meta-top">
+                {% if theme and themeData %}
+                <a href="/themes/{{ theme }}/" class="meta-theme">{{ themeData.name }}</a>
+                <span class="meta-separator" aria-hidden="true">·</span>
+                {% endif %}
+                {% if category and categoryData %}
+                <a href="/{{ category }}/" class="meta-category">{{ categoryData.name }}</a>
+                {% if date %}<span class="meta-separator">·</span>{% endif %}
+                {% endif %}
+                {% if date %}
+                <time datetime="{{ date | isoDate }}" class="meta-date">{{ date | formatDate }}</time>
+                {% endif %}
+            </div>
+
+            <h1 class="article__title">{{ title }}</h1>
+
+            {% if chapeau %}
+            <p class="article__chapeau">{{ chapeau }}</p>
+            {% endif %}
+
+            <div class="article__meta-bottom">
+                {% if author %}
+                {% set authorSlug = author | toSlug %}
+                <span class="meta-author">{{ "article.by" | t }} <a href="/authors/{{ authorSlug }}/" class="author-link">{{ author }}</a></span>
+                {% endif %}
+                {% if author and content %}
+                <span class="meta-separator" aria-hidden="true">·</span>
+                {% endif %}
+                <span class="meta-reading-time">{{ content | readingTime }}</span>
+            </div>
+        </div>
+
+        {% if image %}
+        <div class="article__image-wrapper">
+            <div class="article__image">
+                {% image image, imageAlt or title, "(min-width: 768px) 60vw, 100vw" %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if tags %}
+        <div class="article__tags">
+            {% if tags is iterable and tags is not string %}
+                {% for tag in tags %}
+                    {% set tagSlug = tag | toSlug %}
+                    {% if tagSlug %}
+                    <a href="/tags/{{ tagSlug }}/" class="tag">
+                        <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                        </svg>
+                        <span>{{ tag }}</span>
+                    </a>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% set tagList = tags.split(';') %}
+                {% for tag in tagList %}
+                    {% set tagSlug = tag.trim() | toSlug %}
+                    {% if tagSlug %}
+                    <a href="/tags/{{ tagSlug }}/" class="tag">
+                        <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                        </svg>
+                        <span>{{ tag.trim() }}</span>
+                    </a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="article__content">
+        {{ content | safe }}
+    </div>
+
+    {% if author or date %}
+    <div class="article__byline">
+        {% if author %}
+        {% set authorSlug = author | toSlug %}
+        <p>{{ "article.writtenBy" | t }} <a href="/authors/{{ authorSlug }}/" class="author-link">{{ author }}</a></p>
+        {% endif %}
+        {% if date %}
+        <p>{{ "article.publishedOn" | t }} <time datetime="{{ date | isoDate }}">{{ date | formatDate }}</time></p>
+        {% endif %}
+    </div>
+    {% endif %}
+</article>
+
+{# Related Articles Section #}
+{% set currentPage = { url: page.url, data: { theme: theme, category: category, tags: tags, author: author, relatedArticles: relatedArticles } } %}
+{% set relatedArticles = currentPage | getRelatedArticles(collections.articles, 4) %}
+{% if relatedArticles.length > 0 %}
+<aside class="related-articles-section" aria-labelledby="related-articles-heading">
+    <div class="related-articles-header">
+        <h2 id="related-articles-heading">{{ "article.relatedArticles" | t }}</h2>
+        <p class="related-articles-description">{{ "article.relatedDescription" | t }}</p>
+    </div>
+    <div class="card-grid card-grid--related">
+        {% for article in relatedArticles %}
+        <article class="card">
+            {% if article.data.image %}
+            <div class="card__image card__image--compact">
+                <a href="{{ article.url }}">
+                    {% image article.data.image, article.data.imageAlt or article.data.title, "(min-width: 768px) 25vw, 100vw" %}
+                </a>
+            </div>
+            {% endif %}
+
+            <div class="card__content">
+                {% set articleThemeData = themes | getThemeBySlug(article.data.theme) %}
+                {% if article.data.theme and articleThemeData %}
+                <div class="related-article-theme">
+                    <span class="theme-badge-small">{{ "theme.themePrefix" | t }} {{ articleThemeData.number }}: {{ articleThemeData.name }}</span>
+                </div>
+                {% endif %}
+
+                <h3 class="card__title card__title--small">
+                    <a href="{{ article.url }}">{{ article.data.title }}</a>
+                </h3>
+
+                {% if article.data.chapeau %}
+                <p class="card__chapeau">{{ article.data.chapeau }}</p>
+                {% endif %}
+
+                <div class="card__meta">
+                    {% if article.data.author %}
+                    {% set relatedAuthorSlug = article.data.author | toSlug %}
+                    <span class="meta-author"><a href="/authors/{{ relatedAuthorSlug }}/" class="author-link">{{ article.data.author }}</a></span>
+                    {% endif %}
+                    {% if article.data.author and article.content %}
+                    <span class="meta-separator" aria-hidden="true">·</span>
+                    {% endif %}
+                    {% if article.content %}
+                    <span class="meta-reading-time">{{ article.content | readingTime }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</aside>
+{% endif %}
