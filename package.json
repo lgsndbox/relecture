@@ -12,8 +12,8 @@
     "hash:js": "node scripts/hash-js.js",
     "bundle:assets": "npm run bundle:css && npm run hash:js",
     "generate:favicons": "node scripts/generate-favicons.js",
-    "build:dev": "npm run bundle:assets && eleventy",
-    "build:prod": "npm run bundle:assets && npm run validate && eleventy",
+    "build:dev": "ELEVENTY_ENV=development npm run validate && eleventy",
+    "build:prod": "ELEVENTY_ENV=production npm run validate && eleventy",
     "build": "npm run build:prod",
     "postbuild": "npm run search:index",
     "search:normalize": "node scripts/normalize-for-search.js",
@@ -21,8 +21,9 @@
     "search:copy": "node -e \"const fs = require('fs'); const path = require('path'); const src = '_site_normalized/pagefind'; const dest = '_site/pagefind'; fs.cpSync(src, dest, {recursive: true});\"",
     "search:cleanup": "node -e \"const fs = require('fs'); fs.rmSync('_site_normalized', {recursive: true, force: true});\"",
     "search:index": "npm run search:normalize && npm run search:pagefind && npm run search:copy && npm run search:cleanup",
-    "start": "ELEVENTY_ENV=development npm run bundle:assets && eleventy --serve",
+    "start": "ELEVENTY_ENV=development eleventy --serve",
     "serve": "npm start",
+    "serve-prod": "ELEVENTY_ENV=production eleventy --serve",
     "test": "npm run validate"
   },
   "keywords": [
@@ -38,14 +39,14 @@
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
-    "@quasibit/eleventy-plugin-sitemap": "^2.2.0"
+    "@quasibit/eleventy-plugin-sitemap": "^2.2.0",
+    "lightningcss": "^1.30.2",
+    "pagefind": "^1.4.0",
+    "esbuild": "^0.27.2",
+    "glob": "^13.0.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^7.0.2",
-    "esbuild": "^0.27.2",
-    "glob": "^13.0.0",
-    "lightningcss": "^1.30.2",
-    "pagefind": "^1.4.0",
     "purgecss": "^7.0.2"
   }
 }
