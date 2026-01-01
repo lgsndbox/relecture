@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /
+
+# Optional: explicitly tell bots not to cache/index (some honor these)
+Noindex: /
+Nofollow: /
+Noarchive: /
