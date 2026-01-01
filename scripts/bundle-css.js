@@ -103,7 +103,7 @@ cssFiles.forEach(file => {
   bundledCss += `${sourceComment}${content}\n`;
 });
 
-// Process CSS with lightningcss (minify in production, source maps always)
+// Process CSS with lightningcss (minify in production, source maps not in production)
 let finalCss = bundledCss;
 let sourceMap = null;
 
@@ -112,7 +112,7 @@ try {
     filename: 'main.css',
     code: Buffer.from(bundledCss),
     minify: isProduction,
-    sourceMap: true,  // Always generate source maps
+    sourceMap: !isProduction,  // do not generate source maps in production
     targets: {
       // Support browsers from last 2 years
       chrome: 95 << 16,
