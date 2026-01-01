@@ -85,6 +85,8 @@ export default async function(eleventyConfig) {
 	// ========================================================================
 	// GLOBAL DATA
 	// ========================================================================
+	// pass the env variable
+	eleventyConfig.addGlobalData("env", process.env.ELEVENTY_ENV || "development");
 	// Compute the current year, so that data will be accessible to templates
 	eleventyConfig.addGlobalData("year", new Date().getFullYear());
 

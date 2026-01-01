@@ -2,7 +2,7 @@
 permalink: /robots.txt
 eleventyExcludeFromCollections: true
 ---
-{%- if process.env.ELEVENTY_ENV == "production" -%}
+{%- if env == "production" -%}
 User-agent: *
 Allow: /
 Sitemap: {{ site.url }}/sitemap.xml
