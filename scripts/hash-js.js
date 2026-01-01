@@ -48,7 +48,7 @@ async function processJSFile(sourceFile, outputKey) {
     const result = await esbuild.build({
       entryPoints: [sourcePath],
       minify: isProduction,
-      sourcemap: isProduction ? false : 'external',,  // Generate external source map if not production
+      sourcemap: isProduction ? false : 'external',  // Generate external source map if not production
       target: ['es2020'],     // Modern browsers
       write: false,           // Don't write yet, we need to hash first
       bundle: false,          // Don't bundle, just minify single file
