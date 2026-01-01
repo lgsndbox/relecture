@@ -5,13 +5,6 @@ layout: layouts/base.njk
 {% set currentTheme = themes | getCurrentTheme %}
 
 <div class="homepage">
-    <header class="page-header">
-        <h1>{{ title | default("common.welcome" | t) }}</h1>
-        {% if description %}
-        <p class="page-header-description">{{ description }}</p>
-        {% endif %}
-    </header>
-
     <div class="homepage-spotlight">
     {% if currentTheme %}
     {# Articles from current theme #}
@@ -25,8 +18,8 @@ layout: layouts/base.njk
 
     <section class="current-theme-card">
         <div class="theme-card__header">
-            <div class="theme-card__label">{{ "theme.currentTheme" | t }} {{ currentTheme.name }}</div>
             <div class="theme-card__number">{{ "theme.number" | t }} {{ currentTheme.number }}</div>
+            <div class="theme-card__label">{{ currentTheme.name }}</div>
         </div>
 
         <div class="theme-card__main">
@@ -51,7 +44,10 @@ layout: layouts/base.njk
             <div class="theme-card__content">
                 <div class="theme-card__title-section">
                     <p class="theme-card__date">{{ currentTheme.month }} {{ currentTheme.year }}</p>
+
+    <a href="/themes/{{ currentTheme.slug }}/">
                     <h2 class="theme-card__title">{{ currentTheme.name }}</h2>
+                    </a>
 
                     {% if currentTheme.chapeau %}
                     <p class="theme-card__chapeau">{{ currentTheme.chapeau }}</p>

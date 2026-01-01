@@ -23,10 +23,8 @@ eleventyComputed:
 <div class="theme-page">
     <section class="theme-detail-card">
         <div class="theme-card__header">
-            <div class="theme-card__label">
-                {% if theme.current %}{{ "theme.themeActual" | t }}{% else %}{{ "theme.themeLabel" | t }}{% endif %}: {{ theme.name }}
-            </div>
             <div class="theme-card__number">{{ "theme.number" | t }} {{ theme.number }}</div>
+            <div class="theme-card__label">{{ theme.name }}</div>
         </div>
 
         <div class="theme-card__main">

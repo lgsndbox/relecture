@@ -36,8 +36,6 @@ export default {
 
   // Theme-related strings
   theme: {
-    currentTheme: "Thème du moment:",
-    themeActual: "Thème actuel",
     themeLabel: "Thème",
     number: "Numéro",
     numberShort: "N°",
