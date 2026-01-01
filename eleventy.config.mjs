@@ -9,7 +9,7 @@ import pluginRss from "@11ty/eleventy-plugin-rss";
 // but not in config, so we need that explicit import
 import siteData from "./src/_data/site.js";
 
-// Needed for the article-card shortcode.
+// Needed for the article-card shortcode, to get the current theme information
 import themes from "./src/_data/themes.json" with { type: "json" };
 
 // needed to perform css bundling/minifying in before step
