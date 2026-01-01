@@ -44,11 +44,9 @@ layout: layouts/base.njk
             <div class="theme-card__content">
                 <div class="theme-card__title-section">
                     <p class="theme-card__date">{{ currentTheme.month }} {{ currentTheme.year }}</p>
-
-    <a href="/themes/{{ currentTheme.slug }}/">
-                    <h2 class="theme-card__title">{{ currentTheme.name }}</h2>
-                    </a>
-
+                    <h2 class="theme-card__title">
+                        <a href="/themes/{{ currentTheme.slug }}/" class="theme-card__title-link">{{ currentTheme.name }}</a>
+                    </h2>
                     {% if currentTheme.chapeau %}
                     <p class="theme-card__chapeau">{{ currentTheme.chapeau }}</p>
                     {% endif %}

@@ -95,6 +95,15 @@
     letter-spacing: -0.02em;
   }
 
+  .theme-card__title-link {
+    color: var(--color-text);
+  }
+
+  .theme-card__title-link:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
   .theme-card__introduction {
     padding: 1.5rem;
     background-color: var(--color-background-alt);
