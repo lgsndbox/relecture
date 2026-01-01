@@ -57,5 +57,22 @@
     "name": "Claude Sonnet",
     "bio": "Contributeur et assistant éditorial, passionné par la diffusion des connaissances.",
     "email": ""
+  },
+  {
+    "slug": "aurelien-truong",
+    "name": "Aurélien Truong",
+    "bio": "",
+    "bioShort": "Apprenti Journaliste",
+    "image": "/images/authors/aurelien-truong.jpg",
+    "imageAlt": "Photo de profil d'Aurélien Truong",
+    "website": "",
+    "social": {
+      "twitter": "",
+      "mastodon": ""
+    },
+    "seo": {
+      "title": "Aurélien Truong - Rédacteur en chef, Journaliste| PAUSE",
+      "description": "Découvrez les articles d'Aurélien Truong sur la politique. Contributions régulières à la revue PAUSE."
+    }
   }
 ]

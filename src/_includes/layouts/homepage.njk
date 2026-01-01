@@ -24,17 +24,30 @@ layout: layouts/base.njk
 
         <div class="theme-card__main">
             <div class="theme-card__left">
+                {% if mainArticle %}
+                <div class="theme-card__article-featured">
+                    <span class="badge badge--text badge--sm">{{ "badges.featured" | t }}</span>
+                    {% if mainArticle.data.image %}
+                    <div class="theme-card__image">
+                        {% image mainArticle.data.image, mainArticle.data.imageAlt or mainArticle.data.title, "(min-width: 768px) 40vw, 100vw" %}
+                    </div>
+                    {% endif %}
+
+                    <a href="{{ mainArticle.url }}" class="article-item-link">
+                        {{ mainArticle.data.title }}
+                    </a>
+                    {% if mainArticle.data.author %}
+                    <span class="article-item-author">{{ mainArticle.data.author }}</span>
+                    {% endif %}
+                </div>
+                {% endif %}
                 {% if currentTheme.image %}
                 <div class="theme-card__image">
                     {% image currentTheme.image, currentTheme.imageAlt or currentTheme.name, "(min-width: 768px) 40vw, 100vw" %}
                 </div>
                 {% endif %}
 
-                {% if currentTheme.introduction %}
-                <div class="theme-card__introduction">
-                    <p>{{ currentTheme.introduction }}</p>
-                </div>
-                {% endif %}
+                
 
                 <div class="theme-card__actions">
                     <a href="/themes/{{ currentTheme.slug }}/" class="btn btn--primary btn--block">{{ "theme.viewTheme" | t }}</a>
@@ -50,9 +63,12 @@ layout: layouts/base.njk
                     {% if currentTheme.chapeau %}
                     <p class="theme-card__chapeau">{{ currentTheme.chapeau }}</p>
                     {% endif %}
-
+                    {% if currentTheme.introduction %}
+                    <div class="theme-card__introduction">
+                        <p>{{ currentTheme.introduction }}</p>
+                    </div>
+                    {% endif %}
                 </div>
-
 
                 {% if themeArticles.length > 0 %}
                 <div class="theme-card__articles">
@@ -72,17 +88,7 @@ layout: layouts/base.njk
                         {% endif %}
 
                         {# Main article #}
-                        {% if mainArticle %}
-                        <li class="theme-card__article-item featured">
-                            <span class="badge badge--text badge--sm">{{ "badges.featured" | t }}</span>
-                            <a href="{{ mainArticle.url }}" class="article-item-link">
-                                {{ mainArticle.data.title }}
-                            </a>
-                            {% if mainArticle.data.author %}
-                            <span class="article-item-author">{{ mainArticle.data.author }}</span>
-                            {% endif %}
-                        </li>
-                        {% endif %}
+                        
 
                         {# Other articles (show 4 most recent) #}
                         {% set displayArticles = regularArticles | reverse | slice(0, 4) %}

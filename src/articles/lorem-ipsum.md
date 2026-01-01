@@ -3,7 +3,8 @@ layout: layouts/article.njk
 title: "Guide Complet Markdown"
 description: "Un exemple exhaustif de toutes les fonctionnalités Markdown"
 chapeau: "Un guide pratique présentant toutes les possibilités de formatage Markdown pour créer des articles riches et élégants."
-image: src/images/articles/exemple-image.jpg
+image: "src/images/articles/exemple-image2.jpg"
+imageAlt: foo
 author: Émilie Gabiot
 date: 2025-12-15
 category: culture
