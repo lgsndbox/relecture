@@ -9,7 +9,6 @@ ogImage: "/images/articles/your-image-og.jpg"
 author: Aurélien Truong
 date: 2025-12-31
 category: analyse-discours
-theme: 
 editorial: false
 mainArticle: false
 featured: false
