@@ -24,3 +24,15 @@ export function isoDate(date) {
   const d = new Date(date);
   return d.toISOString().split('T')[0];
 }
+
+
+/**
+ * Format date for RSS/Atom feeds (RFC 3339)
+ * @param {Date|string} date - Date to format
+ * @returns {string} RFC 3339 date string (YYYY-MM-DDTHH:mm:ssZ)
+ */
+export function dateToRfc3339(date) {
+  if (!date) return "";
+  const d = new Date(date);
+  return d.toISOString();
+}

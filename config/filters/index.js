@@ -3,7 +3,7 @@
  */
 
 // Date filters
-export { formatDate, isoDate } from './date-filters.js';
+export { formatDate, isoDate, dateToRfc3339 } from './date-filters.js';
 
 // Utility filters
 export { limit, toSlug, readingTime, t, processThemeArticles } from './utility-filters.js';
