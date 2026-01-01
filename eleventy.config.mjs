@@ -149,12 +149,6 @@ export default async function(eleventyConfig) {
 	});
 
 	// ========================================================================
-	// IGNORES
-	// ========================================================================
-	// Ignore documentation files. Do not generate site pages for them.
-	eleventyConfig.ignores.add("../docs/**/*");
-
-	// ========================================================================
 	// PASSTHROUGH COPY
 	// ========================================================================
 	// Note: CSS is bundled by bundle-css.js to _site/css/main.css
