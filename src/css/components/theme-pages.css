@@ -1,0 +1,234 @@
+/* ============================================================================
+   THEME PAGES COMPONENT
+   Theme detail pages and themes archive listing
+   ============================================================================ */
+@layer components {
+  .theme-page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  /* Theme detail card - reuses current-theme-card styles */
+  .theme-detail-card {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .theme-page-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .list-themes {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Theme compact card for past themes */
+  .theme-compact-card {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+  }
+
+  .theme-compact-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .theme-current {
+    border-color: var(--color-primary);
+  }
+
+  /* Use .badge.badge-primary.badge--lg.badge--absolute instead */
+
+  .theme-compact-card__image {
+    aspect-ratio: 2 / 1;
+    overflow: hidden;
+    background-color: var(--color-background-alt);
+    max-height: 180px;
+  }
+
+  .theme-compact-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .theme-compact-card:hover .theme-compact-card__image img {
+    transform: scale(1.05);
+  }
+
+  .theme-compact-card__content {
+    padding: 1.5rem;
+  }
+
+  .theme-compact-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .theme-compact-card__number {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .theme-compact-card__date {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .theme-compact-card__title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .theme-compact-card__title a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .theme-compact-card__title a:hover {
+    color: var(--color-primary);
+  }
+
+  .theme-compact-card__chapeau {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .theme-compact-card__description {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+  }
+
+  .theme-compact-card__featured-articles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .theme-featured-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-decoration: none;
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-light);
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .theme-featured-link:hover {
+    background-color: var(--color-background-alt);
+    border-color: var(--color-primary);
+  }
+
+  .theme-featured-link__title {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    line-height: 1.4;
+    font-weight: 600;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .theme-featured-link__badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    align-self: flex-start;
+  }
+
+  .theme-featured-link.editorial .theme-featured-link__badge {
+    color: var(--color-primary);
+  }
+
+  .theme-featured-link.main .theme-featured-link__badge {
+    color: var(--color-text-muted);
+  }
+
+  .theme-compact-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .theme-compact-card__articles-count {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .theme-compact-card__link {
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  .theme-compact-card__link:hover {
+    color: var(--color-primary-dark);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    /* Theme cards */
+    .theme-compact-card {
+      border-radius: var(--radius-md);
+    }
+
+    .theme-compact-card__image {
+      aspect-ratio: 16 / 9;
+      max-height: 180px;
+    }
+
+    .theme-compact-card__content {
+      padding: 1.25rem;
+    }
+
+    .theme-compact-card__title {
+      font-size: 1.2rem;
+    }
+
+    .theme-compact-card__chapeau {
+      font-size: 0.9rem;
+    }
+  }
+}

@@ -1,0 +1,197 @@
+---
+layout: layouts/base.njk
+title: Plan du Site
+description: Plan complet et navigation de PAUSE - La revue qui prend son temps
+permalink: /plan-du-site/
+---
+
+<article class="page-content">
+  <h1>Plan du Site</h1>
+
+  <p class="lead">Retrouvez ici l'ensemble des pages et sections de <strong>PAUSE - La revue qui prend son temps</strong>.</p>
+
+  <nav aria-label="Table des matières du plan du site">
+    <ul>
+      <li><a href="#pages-principales">Pages principales</a></li>
+      <li><a href="#themes">Thèmes mensuels</a></li>
+      <li><a href="#categories">Navigation par catégorie</a></li>
+      <li><a href="#tags">Navigation par tag</a></li>
+      <li><a href="#auteurs">Auteurs</a></li>
+      <li><a href="#pages-utiles">Pages utiles</a></li>
+    </ul>
+  </nav>
+
+  <section id="pages-principales">
+    <h2>Pages principales</h2>
+
+    <h3><a href="/">Accueil</a></h3>
+    <ul>
+      <li>Présentation du thème actuel</li>
+      <li>Articles à la une</li>
+      <li>Articles mis en avant</li>
+    </ul>
+
+    <h3><a href="/themes/">Thèmes</a></h3>
+    <p>Tous les thèmes mensuels de PAUSE - Thème actuel et archives</p>
+
+    <h3><a href="/standalone/">Articles Autonomes</a></h3>
+    <p>Articles non associés à un thème spécifique</p>
+
+    <h3><a href="/recherche/">Recherche</a></h3>
+    <p>Recherchez dans tous les articles de PAUSE</p>
+
+    <h3><a href="/tags/">Tags</a></h3>
+    <p>Explorez le contenu par mots-clés</p>
+  </section>
+
+  <section id="themes">
+    <h2>Thèmes mensuels ({{ themes | length }})</h2>
+
+    {% set currentTheme = themes | getCurrentTheme %}
+    {% if currentTheme %}
+    <h3>Thème actuel</h3>
+    <ul>
+      <li>
+        <a href="/themes/{{ currentTheme.slug }}/">Thème n°{{ currentTheme.number }} - {{ currentTheme.name }}</a>
+        {% if currentTheme.description %} - {{ currentTheme.description }}{% endif %}
+        {% set themeArticles = articlesByTheme | getArticlesByTheme(currentTheme.slug) %}
+        {% if themeArticles.length > 0 %}
+        <ul>
+          {% for article in themeArticles | limit(5) %}
+          <li><a href="{{ article.url }}">{{ article.data.title }}</a></li>
+          {% endfor %}
+          {% if themeArticles.length > 5 %}
+          <li><a href="/themes/{{ currentTheme.slug }}/">… et {{ themeArticles.length - 5 }} autres articles</a></li>
+          {% endif %}
+        </ul>
+        {% endif %}
+      </li>
+    </ul>
+    {% endif %}
+
+    {% set pastThemes = themes | getPastThemes %}
+    {% if pastThemes.length > 0 %}
+    <h3>Thèmes précédents</h3>
+    <ul>
+      {% for theme in pastThemes %}
+      <li>
+        <a href="/themes/{{ theme.slug }}/">Thème n°{{ theme.number }} - {{ theme.name }}</a>
+        {% if theme.description %} - {{ theme.description }}{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  <section id="categories">
+    <h2>Navigation par catégorie</h2>
+
+    {% for category in categories %}
+    <h3><a href="/{{ category.slug }}/">{{ category.name }}</a></h3>
+    {% if category.description %}<p>{{ category.description }}</p>{% endif %}
+
+    {% set categoryArticles = articlesByCategory | getArticlesByCategory(category.slug) %}
+    {% if categoryArticles.length > 0 %}
+    <p><strong>{{ categoryArticles.length }} article{% if categoryArticles.length > 1 %}s{% endif %}</strong></p>
+    <ul>
+      {% for article in categoryArticles | limit(5) %}
+      <li><a href="{{ article.url }}">{{ article.data.title }}</a></li>
+      {% endfor %}
+      {% if categoryArticles.length > 5 %}
+      <li><a href="/{{ category.slug }}/">Voir tous les {{ categoryArticles.length }} articles</a></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section id="tags">
+    <h2>Navigation par tag</h2>
+
+    {% set allTags = collections.articles | getAllTags %}
+    {% if allTags.length > 0 %}
+    <p>Explorez nos {{ allTags.length }} tags les plus utilisés :</p>
+    <ul class="tag-cloud">
+      {% for tag in allTags | limit(30) %}
+      <li>
+        <a href="/tags/{{ tag.slug }}/">{{ tag.name }}</a> ({{ tag.count }})
+      </li>
+      {% endfor %}
+    </ul>
+    <p><a href="/tags/">Voir tous les tags →</a></p>
+    {% endif %}
+  </section>
+
+  <section id="auteurs">
+    <h2>Auteurs</h2>
+
+    {% set authors = collections.articlesByAuthor %}
+    {% if authors %}
+    <p>Découvrez nos {{ authors | length }} contributeurs :</p>
+    <ul>
+      {% for slug, author in authors %}
+      <li>
+        <a href="/authors/{{ author.slug }}/">{{ author.name }}</a>
+        ({{ author.articles.length }} article{% if author.articles.length > 1 %}s{% endif %})
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  <section id="pages-utiles">
+    <h2>Pages utiles</h2>
+
+    <h3>Informations</h3>
+    <ul>
+      <li><a href="/culture/a-propos/">À propos de PAUSE</a> - Histoire et philosophie éditoriale</li>
+      <li><a href="/culture/guide-navigation/">Comment naviguer sur PAUSE</a> - Guide de navigation</li>
+      <li><a href="/culture/contribuer-pause/">Contribuer à PAUSE</a> - Guide pour proposer vos articles</li>
+      <li><a href="/contact/">Contact</a> - Toutes les façons de nous contacter</li>
+    </ul>
+
+    <h3>Pages légales</h3>
+    <ul>
+      <li><a href="/mentions-legales/">Mentions Légales</a> - Informations légales obligatoires</li>
+      <li><a href="/politique-confidentialite/">Politique de Confidentialité</a> - Protection des données personnelles (RGPD)</li>
+    </ul>
+
+    <h3>Flux et outils</h3>
+    <ul>
+      <li><a href="/feed.xml">Flux RSS</a> - Suivez les nouveaux articles</li>
+      <li><a href="/sitemap.xml">Sitemap XML</a> - Plan technique du site</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <p><small><strong>Dernière mise à jour :</strong> {{ year }}</small></p>
+  <p><small>Pour toute question : <a href="mailto:contact@revue-pause.fr">contact@revue-pause.fr</a></small></p>
+</article>
+
+<style>
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.tag-cloud li {
+  display: inline;
+}
+
+.tag-cloud a {
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  background: var(--color-background-alt);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.tag-cloud a:hover {
+  background: var(--color-primary);
+  color: white;
+}
+</style>

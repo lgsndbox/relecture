@@ -1,0 +1,114 @@
+---
+pagination:
+  data: themes
+  size: 1
+  alias: theme
+permalink: "/themes/{{ theme.slug }}/"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ theme.name }}"
+  description: "Thème {{ theme.number }}: {{ theme.name }} - {{ theme.description }}"
+  themeSlug: "{{ theme.slug }}"
+---
+
+{% set themeId = theme.slug %}
+{% set themeArticles = collections.articlesByTheme | getArticlesByTheme(themeId) %}
+
+{# Process theme articles using shared filter #}
+{% set processed = themeArticles | processThemeArticles %}
+{% set editorialArticle = processed.editorial %}
+{% set mainArticle = processed.main %}
+{% set regularArticles = processed.regular %}
+
+<div class="theme-page">
+    <section class="theme-detail-card">
+        <div class="theme-card__header">
+            <div class="theme-card__label">
+                {% if theme.current %}{{ "theme.themeActual" | t }}{% else %}{{ "theme.themeLabel" | t }}{% endif %}: {{ theme.name }}
+            </div>
+            <div class="theme-card__number">{{ "theme.number" | t }} {{ theme.number }}</div>
+        </div>
+
+        <div class="theme-card__main">
+            <div class="theme-card__left">
+                {% if theme.image %}
+                <div class="theme-card__image">
+                    {% image theme.image, theme.imageAlt or theme.name, "(min-width: 768px) 40vw, 100vw" %}
+                </div>
+                {% endif %}
+
+                {% if theme.introduction %}
+                <div class="theme-card__introduction">
+                    <p>{{ theme.introduction }}</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="theme-card__content">
+                <div class="theme-card__title-section">
+                    <p class="theme-card__date">{{ theme.month }} {{ theme.year }}</p>
+                    <h1 class="theme-card__title">{{ theme.name }}</h1>
+
+                    {% if theme.chapeau %}
+                    <p class="theme-card__chapeau">{{ theme.chapeau }}</p>
+                    {% endif %}
+                </div>
+
+                {% if themeArticles.length > 0 %}
+                <div class="theme-card__articles">
+                    <h2 class="theme-card__articles-title">{{ "theme.articlesTitle" | t }}</h2>
+                    <ul class="theme-card__articles-list">
+                        {# Editorial first #}
+                        {% if editorialArticle %}
+                        <li class="theme-card__article-item editorial">
+                            <span class="badge badge--text badge--sm">{{ "badges.editorial" | t }}</span>
+                            <a href="{{ editorialArticle.url }}" class="article-item-link">
+                                {{ editorialArticle.data.title }}
+                            </a>
+                            {% if editorialArticle.data.author %}
+                            <span class="article-item-author">{{ editorialArticle.data.author }}</span>
+                            {% endif %}
+                        </li>
+                        {% endif %}
+
+                        {# Main article #}
+                        {% if mainArticle %}
+                        <li class="theme-card__article-item featured">
+                            <span class="badge badge--text badge--sm">{{ "badges.featured" | t }}</span>
+                            <a href="{{ mainArticle.url }}" class="article-item-link">
+                                {{ mainArticle.data.title }}
+                            </a>
+                            {% if mainArticle.data.author %}
+                            <span class="article-item-author">{{ mainArticle.data.author }}</span>
+                            {% endif %}
+                        </li>
+                        {% endif %}
+
+                        {# All other articles #}
+                        {% for article in regularArticles %}
+                        <li class="theme-card__article-item">
+                            <a href="{{ article.url }}" class="article-item-link">
+                                {{ article.data.title }}
+                            </a>
+                            {% if article.data.author %}
+                            <span class="article-item-author">{{ article.data.author }}</span>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {% if not themeArticles.length %}
+    <section class="empty-state">
+        <p>{{ "theme.noArticles" | t }}</p>
+    </section>
+    {% endif %}
+
+    <footer class="theme-page-footer">
+        <a href="/themes/" class="btn btn--outline">{{ "theme.backToThemes" | t }}</a>
+    </footer>
+</div>

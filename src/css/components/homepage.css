@@ -1,0 +1,26 @@
+/* ============================================================================
+   HOMEPAGE CONTAINER
+   Main homepage layout wrapper
+   ============================================================================ */
+@layer components {
+  .homepage {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .homepage-spotlight {
+    padding: 1rem 0;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .homepage {
+      padding: 0;
+    }
+
+    .homepage-spotlight {
+      padding: 0.25rem;
+    }
+  }
+}

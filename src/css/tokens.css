@@ -1,0 +1,155 @@
+/* ============================================================================
+   DESIGN TOKENS
+   Colors, spacing, typography, shadows, transitions
+   ============================================================================ */
+@layer tokens {
+  :root {
+    --color-primary-h: 356;
+    --color-primary-s: 100%;
+    --color-primary-l: 37%;
+    --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
+    --color-primary-dark: hsl(var(--color-primary-h), var(--color-primary-s), 27%);
+    --color-primary-light: hsl(var(--color-primary-h), var(--color-primary-s), 47%);
+
+    --color-neutral-50: hsl(0, 0%, 98%);
+    --color-neutral-100: hsl(0, 0%, 95%);
+    --color-neutral-200: hsl(0, 0%, 90%);
+    --color-neutral-300: hsl(0, 0%, 83%);
+    --color-neutral-400: hsl(0, 0%, 64%);
+    --color-neutral-500: hsl(0, 0%, 45%);
+    --color-neutral-600: hsl(0, 0%, 38%);
+    --color-neutral-700: hsl(0, 0%, 26%);
+    --color-neutral-800: hsl(0, 0%, 15%);
+    --color-neutral-900: hsl(0, 0%, 9%);
+
+    --color-text: hsl(0, 0%, 13%);
+    --color-text-muted: hsl(0, 0%, 38%);
+    --color-background: hsl(0, 0%, 97%);
+    --color-background-alt: hsl(0, 0%, 95%);
+    --color-border: hsl(0, 0%, 90%);
+    --color-border-light: hsl(0, 0%, 93%);
+
+    --color-code-bg: hsl(0, 0%, 96%);
+    --color-code-text: hsl(0, 0%, 20%);
+    --color-pre-bg: hsl(0, 0%, 18%);
+    --color-pre-text: hsl(0, 0%, 97%);
+
+    --color-skip-bg: hsl(0, 0%, 0%);
+    --color-skip-text: hsl(0, 0%, 100%);
+
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+
+    /* Fluid spacing - adapts between mobile and desktop */
+    --spacing-page: clamp(1rem, 4vw, 3rem);
+    --spacing-section: clamp(1.5rem, 5vw, 3rem);
+    --spacing-content: clamp(0.75rem, 2vw, 1.5rem);
+    --max-width: 1200px;
+
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.15);
+
+    --transition-color: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    --transition-transform: transform 0.2s ease, box-shadow 0.2s ease;
+
+    /* Focus ring token (keeps focus consistent site-wide) */
+    --focus-ring: 2px solid var(--color-primary);
+    --focus-offset: 3px;
+
+    /* Animation timing tokens - Descriptive names for common durations */
+    --duration-fast: 150ms;      /* Quick feedback (hover states) */
+    --duration-normal: 200ms;    /* Standard transitions (current: 0.2s) */
+    --duration-medium: 250ms;    /* Slightly slower (smooth feel) */
+    --duration-slow: 350ms;      /* Deliberate animations */
+
+    /* Touch targets - WCAG AAA minimum for interactive elements */
+    --touch-target-min: 44px;
+
+    /* Layout measurements - Common spacing patterns */
+    --header-padding-y: 0.75rem;     /* Vertical padding for header elements */
+    --header-padding-x: 3rem;        /* Horizontal padding for header/footer */
+    --header-mobile-padding: 1rem;   /* Padding on mobile devices */
+
+    /* Card and image ratios */
+    --card-image-ratio: 2 / 1;       /* Wide aspect ratio for card images */
+
+    /* Z-index scale - Prevents z-index conflicts */
+    --z-sticky-nav: 100;             /* Sticky navigation */
+    --z-header-mobile: 200;          /* Mobile header (above sticky nav) */
+    --z-skip-link: 1000;             /* Skip link (high priority for accessibility) */
+    --z-menu-toggle: 1001;           /* Mobile menu toggle (highest) */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --color-primary-l: 55%;
+      --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
+      --color-primary-dark: hsl(var(--color-primary-h), var(--color-primary-s), 45%);
+      --color-primary-light: hsl(var(--color-primary-h), var(--color-primary-s), 65%);
+
+      --color-neutral-50: hsl(0, 0%, 10%);
+      --color-neutral-100: hsl(0, 0%, 15%);
+      --color-neutral-200: hsl(0, 0%, 20%);
+      --color-neutral-300: hsl(0, 0%, 30%);
+      --color-neutral-400: hsl(0, 0%, 45%);
+      --color-neutral-500: hsl(0, 0%, 60%);
+      --color-neutral-600: hsl(0, 0%, 70%);
+      --color-neutral-700: hsl(0, 0%, 80%);
+      --color-neutral-800: hsl(0, 0%, 90%);
+      --color-neutral-900: hsl(0, 0%, 95%);
+
+      --color-text: hsl(0, 0%, 95%);
+      --color-text-muted: hsl(0, 0%, 70%);
+      --color-background: hsl(0, 0%, 12%);
+      --color-background-alt: hsl(0, 0%, 10%);
+      --color-border: hsl(0, 0%, 25%);
+      --color-border-light: hsl(0, 0%, 20%);
+
+      --color-code-bg: hsl(0, 0%, 20%);
+      --color-code-text: hsl(0, 0%, 85%);
+      --color-pre-bg: hsl(0, 0%, 15%);
+      --color-pre-text: hsl(0, 0%, 97%);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --color-primary-l: 55%;
+    --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
+    --color-primary-dark: hsl(var(--color-primary-h), var(--color-primary-s), 45%);
+    --color-primary-light: hsl(var(--color-primary-h), var(--color-primary-s), 65%);
+
+    --color-neutral-50: hsl(0, 0%, 10%);
+    --color-neutral-100: hsl(0, 0%, 15%);
+    --color-neutral-200: hsl(0, 0%, 20%);
+    --color-neutral-300: hsl(0, 0%, 30%);
+    --color-neutral-400: hsl(0, 0%, 45%);
+    --color-neutral-500: hsl(0, 0%, 60%);
+    --color-neutral-600: hsl(0, 0%, 70%);
+    --color-neutral-700: hsl(0, 0%, 80%);
+    --color-neutral-800: hsl(0, 0%, 90%);
+    --color-neutral-900: hsl(0, 0%, 95%);
+
+    --color-text: hsl(0, 0%, 95%);
+    --color-text-muted: hsl(0, 0%, 70%);
+    --color-background: hsl(0, 0%, 12%);
+    --color-background-alt: hsl(0, 0%, 10%);
+    --color-border: hsl(0, 0%, 25%);
+    --color-border-light: hsl(0, 0%, 20%);
+
+    --color-code-bg: hsl(0, 0%, 20%);
+    --color-code-text: hsl(0, 0%, 85%);
+    --color-pre-bg: hsl(0, 0%, 15%);
+    --color-pre-text: hsl(0, 0%, 97%);
+  }
+
+  /* Note: Light theme colors inherit from base :root above when data-theme="light" */
+  /* Dark theme colors are duplicated between media query and [data-theme="dark"] */
+  /* This is necessary to support both auto dark mode and manual dark mode selection */
+}

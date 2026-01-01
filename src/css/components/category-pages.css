@@ -1,0 +1,156 @@
+/* ============================================================================
+   CATEGORY PAGES COMPONENT
+   Category, tag, and standalone article listing pages
+   ============================================================================ */
+@layer components {
+  .category-page,
+  .tags-page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--color-primary);
+  }
+
+  .page-description {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  /* Tags cloud page */
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 4rem;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  /* Tag page header */
+  .tag-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+
+  .tag-icon svg {
+    display: block;
+  }
+
+  .tag-name {
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .tag-count {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+  }
+
+  .tag--cloud:hover .tag-count {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .tags-list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .tags-alphabetical {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .tag-list-item {
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.35rem 0;
+    margin: 0 1rem;
+  }
+
+  .tag-list-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: var(--transition-color);
+  }
+
+  .tag-list-link:hover {
+    color: var(--color-primary);
+  }
+
+  .tag-list-name {
+    font-weight: 600;
+  }
+
+  .tag-list-count {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Standalone Articles Page - Specific styles only */
+  .list-standalone {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.25rem 1rem;
+  }
+
+  .standalone-articles-section {
+    margin-bottom: 3rem;
+  }
+
+  /* Category Page - Specific styles only */
+  .category-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0rem 1rem;
+  }
+
+  .category-articles-section {
+    margin-bottom: 3rem;
+  }
+
+  /* Improved image loading on mobile */
+  img {
+    height: auto;
+    object-fit: cover;
+  }
+}

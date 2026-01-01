@@ -1,0 +1,65 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ site.language }}">
+    <title>{{ site.title }}</title>
+    <subtitle>{{ site.description }}</subtitle>
+    <link href="{{ site.url }}{{ permalink }}" rel="self"/>
+    <link href="{{ site.url }}/"/>
+    <updated>{{ collections.articles | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+    <id>{{ site.url }}/</id>
+    <author>
+        <name>{{ site.author.name }}</name>
+        <email>{{ site.author.email }}</email>
+    </author>
+    {%- for article in collections.articles | limit(20) %}
+    <entry>
+        <title>{{ article.data.title }}</title>
+        <link href="{{ article.url | absoluteUrl(site.url) }}"/>
+        <updated>{{ article.date | dateToRfc3339 }}</updated>
+        <id>{{ article.url | absoluteUrl(site.url) }}</id>
+        {#
+          SECURITY NOTE: RSS Content Trust Model
+
+          This feed outputs HTML content directly from markdown articles.
+          This is SAFE because:
+          - All content comes from trusted authors only
+          - Markdown files are stored in the repository
+          - No user-submitted or external content is accepted
+
+          IF you plan to accept external contributions or user-submitted content:
+          - Enable the 'sanitize' filter in eleventy.config.js (see commented code)
+          - Use: {{ article.content | sanitize }}
+          - This will strip potentially malicious HTML while preserving safe content
+        #}
+        <content type="html"><![CDATA[{{ article.content }}]]></content>
+        {%- if article.data.author %}
+        <author>
+            <name>{{ article.data.author }}</name>
+        </author>
+        {%- endif %}
+        {%- if article.data.category %}
+        {%- set categoryData = categories | getCategoryBySlug(article.data.category) %}
+        {%- if categoryData %}
+        <category term="{{ article.data.category }}" label="{{ categoryData.name }}"/>
+        {%- endif %}
+        {%- endif %}
+        {%- if article.data.theme %}
+        {%- set themeData = themes | getThemeBySlug(article.data.theme) %}
+        {%- if themeData %}
+        <category term="{{ article.data.theme }}" label="{{ themeData.name }}"/>
+        {%- endif %}
+        {%- endif %}
+        {%- if article.data.tags %}
+        {%- for tag in article.data.tags %}
+        <category term="{{ tag }}"/>
+        {%- endfor %}
+        {%- endif %}
+        {%- if article.data.description %}
+        <summary>{{ article.data.description }}</summary>
+        {%- endif %}
+    </entry>
+    {%- endfor %}
+</feed>

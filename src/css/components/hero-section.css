@@ -1,0 +1,14 @@
+/* ============================================================================
+   HERO SECTION COMPONENT
+   Large hero banner for theme pages with background image and overlay
+   ============================================================================ */
+@layer components {
+
+  html[data-theme="dark"] .hero-overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(26, 26, 26, 0.92) 0%,
+      rgba(26, 26, 26, 0.85) 100%
+    );
+  }
+}

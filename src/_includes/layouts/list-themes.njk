@@ -1,0 +1,84 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="list-themes">
+    <header class="page-header">
+        <h1>{{ title | default("nav.allThemes" | t) }}</h1>
+        {% if description %}
+        <p class="page-header-description">{{ description }}</p>
+        {% endif %}
+    </header>
+
+    {% set currentTheme = themes | getCurrentTheme %}
+    {% set allThemesSorted = themes | sort(attribute='number') | reverse %}
+
+    {# All themes in a single grid #}
+    <section class="all-themes-section">
+        <div class="themes-grid">
+            {% for theme in allThemesSorted %}
+            {% set isCurrentTheme = (theme.current === true) %}
+            {% set themeArticles = collections.articlesByTheme | getArticlesByTheme(theme.slug) %}
+            {% set processed = themeArticles | processThemeArticles %}
+            {% set editorialArticle = processed.editorial %}
+            {% set mainArticle = processed.main %}
+
+            <article class="theme-compact-card {% if isCurrentTheme %}theme-current{% endif %}">
+                {% if isCurrentTheme %}
+                <div class="badge badge--primary badge--lg badge--absolute">{{ "badges.currentTheme" | t }}</div>
+                {% endif %}
+
+                {% if theme.image %}
+                <div class="theme-compact-card__image">
+                    <a href="/themes/{{ theme.slug }}/">
+                        {% image theme.image, theme.imageAlt or theme.name, "(min-width: 768px) 25vw, 100vw" %}
+                    </a>
+                </div>
+                {% endif %}
+
+                <div class="theme-compact-card__content">
+                    <div class="theme-compact-card__header">
+                        <span class="theme-compact-card__number">{{ "theme.numberShort" | t }} {{ theme.number }}</span>
+                        <span class="theme-compact-card__date">{{ theme.month }} {{ theme.year }}</span>
+                    </div>
+
+                    <h3 class="theme-compact-card__title">
+                        <a href="/themes/{{ theme.slug }}/">{{ theme.name }}</a>
+                    </h3>
+
+                    {% if theme.chapeau %}
+                    <p class="theme-compact-card__chapeau">{{ theme.chapeau }}</p>
+                    {% endif %}
+
+                    {% if theme.introduction %}
+                    <p class="theme-compact-card__description">{{ theme.introduction }}</p>
+                    {% endif %}
+
+                    {# Editorial and Main Article Links #}
+                    <div class="theme-compact-card__featured-articles">
+                        {% if editorialArticle %}
+                        <a href="{{ editorialArticle.url }}" class="theme-featured-link editorial">
+                            <span class="theme-featured-link__title">{{ editorialArticle.data.title }}</span>
+                            <span class="theme-featured-link__badge">{{ "badges.editorial" | t }}</span>
+                        </a>
+                        {% endif %}
+                        {% if mainArticle %}
+                        <a href="{{ mainArticle.url }}" class="theme-featured-link main">
+                            <span class="theme-featured-link__title">{{ mainArticle.data.title }}</span>
+                            <span class="theme-featured-link__badge">{{ "badges.featured" | t }}</span>
+                        </a>
+                        {% endif %}
+                    </div>
+
+                    <div class="theme-compact-card__footer">
+                        {% if themeArticles.length > 0 %}
+                        <span class="theme-compact-card__articles-count">{{ themeArticles.length }} {{ "common.article" if themeArticles.length == 1 else "common.articles" | t }}</span>
+                        {% endif %}
+                        <a href="/themes/{{ theme.slug }}/" class="theme-compact-card__link">{{ "theme.viewThemeArrow" | t }}</a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+</div>

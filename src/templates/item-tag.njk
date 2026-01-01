@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.tagsArray
+  size: 1
+  alias: tagData
+permalink: "/tags/{{ tagData[0] }}/"
+eleventyComputed:
+  title: "Tag: {{ tagData[1].name }}"
+  description: "Découvrez tous les articles sur {{ tagData[1].name }} dans PAUSE - {{ tagData[1].articles.length }} article{% if tagData[1].articles.length > 1 %}s{% endif %} disponible{% if tagData[1].articles.length > 1 %}s{% endif %}"
+  tagSlug: "{{ tagData[0] }}"
+  tagName: "{{ tagData[1].name }}"
+---
+
+<div class="tag-page">
+    <header class="page-header">
+        <div class="tag-badge">
+            <span class="tag-icon">
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              </svg>
+            </span>
+            <h1 class="tag-name">{{ tagData[1].name }}</h1>
+        </div>
+
+        {% set tagInfo = tags | getTagBySlug(tagData[1].slug) %}
+        {% if tagInfo and tagInfo.description %}
+        <p class="tag-description">{{ tagInfo.description }}</p>
+        {% endif %}
+
+        <p class="tag-stats">
+            {{ tagData[1].articles.length }} article{% if tagData[1].articles.length > 1 %}s{% endif %} avec ce tag
+        </p>
+    </header>
+
+    <div class="articles-grid">
+        {% for article in tagData[1].articles %}
+        {% articleCard article, {showThemeBadge: true, showCategoryBadge: true, showReadingTime: true, imageSizes: "(min-width: 768px) 30vw, 100vw"} %}
+        {% endfor %}
+    </div>
+
+    <div class="tag-actions">
+        <a href="/tags/" class="btn btn--secondary">Voir tous les tags</a>
+    </div>
+</div>

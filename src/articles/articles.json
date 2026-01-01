@@ -1,0 +1,3 @@
+{
+  "permalink": "/{{ category }}/{{ page.fileSlug }}/"
+}
